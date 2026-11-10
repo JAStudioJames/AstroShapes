@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f1f0ef" />
+  <meta name="description" content="Astro Shapes — engineered aluminum extrusions, made for possibility." />
+  <title>Astro Shapes — Engineered for Possibility</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+    <header class="site-header">
+      <a class="mobile-wordmark" href="#top" aria-label="Astro Shapes home">astro<span class="mark-mini">✦</span></a>
+      <nav class="nav-drawer" id="main-navigation" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="mailto:hello@astroshapes.com?subject=Astro%20Shapes%20Inquiry">Contact</a>
+        <a href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer">Website <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Open navigation"><span class="nav-star" aria-hidden="true">✦</span></button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="Interactive Astro Shapes extruded logo">
+        <div class="hero-grain" aria-hidden="true"></div>
+        <div class="finish-panel">
+          <p class="eyebrow">01 / MATERIAL EXPLORER</p>
+          <div class="finishes" role="group" aria-label="Select extrusion finish">
+            <button class="finish-choice selected" data-finish="aluminum" type="button" aria-pressed="true"><span class="finish-dot"></span>Aluminum</button>
+            <button class="finish-choice" data-finish="black" type="button" aria-pressed="false"><span class="finish-dot"></span>Black Chrome</button>
+            <button class="finish-choice" data-finish="copper" type="button" aria-pressed="false"><span class="finish-dot"></span>Copper</button>
+          </div>
+        </div>
+
+        <div class="webgl-wrap" id="webgl-wrap">
+          <canvas id="webgl-canvas" aria-label="Interactive 3D metal Astro logo. Drag to rotate, scroll to zoom." role="img"></canvas>
+          <div class="webgl-fallback" id="webgl-fallback" hidden>ASTRO<span>✦</span></div>
+        </div>
+        <div class="drag-hint" id="drag-hint"><span class="drag-icon">↔</span> DRAG TO EXPLORE <span class="drag-separator">·</span> SCROLL TO ZOOM</div>
+
+        <div class="hero-bottom">
+          <div class="mission-title">OUR MISSION</div>
+          <div class="mission-rule"></div>
+          <p>To manufacture custom-finished aluminum extrusions for markets that demand excellence in quality and service.</p>
+        </div>
+        <div class="hero-index">ASTRO SHAPES <span>—</span> 01 / 03</div>
+      </section>
+
+      <section class="services-section" id="services">
+        <div class="section-kicker"><span>SERVICES</span><span>ENGINEERED FOR WHAT'S NEXT</span></div>
+        <div class="services-intro"><h1>Made to shape<br /><em>what's possible.</em></h1><p>From engineering through finishing and delivery, every detail is shaped by the people behind the work.</p></div>
+        <div class="service-grid">
+          <a class="service-card" href="https://www.astroshapes.com/services/" target="_blank" rel="noopener noreferrer"><span class="service-number">01</span><span class="service-visual finishing-art" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>Finishing</h2><span class="service-arrow">↗</span></div><p>Exceptional finishes. Enduring performance.</p></a>
+          <a class="service-card" href="https://www.astroshapes.com/services/thermal/" target="_blank" rel="noopener noreferrer"><span class="service-number">02</span><span class="service-visual thermal-art" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>Thermal</h2><span class="service-arrow">↗</span></div><p>Engineered for energy performance.</p></a>
+          <a class="service-card" href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer"><span class="service-number">03</span><span class="service-visual shipping-art" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>Shipping</h2><span class="service-arrow">↗</span></div><p>From our floor to your next big idea.</p></a>
+        </div>
+      </section>
+      <section class="closing-section" id="products"><span class="eyebrow">PRODUCTS / CAPABILITIES</span><h2>Precision in every profile.</h2><p>Explore the possibilities of custom aluminum extrusions.</p><a href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer">Explore Astro Shapes <span>↗</span></a></section>
+      <footer id="about"><span>✦ ASTRO SHAPES</span><span>CRAFTED FOR POSSIBILITY.</span><span>INTERACTIVE CONCEPT © 2026</span></footer>
+    </main>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
