@@ -57,8 +57,8 @@ try {
     copper: { color: 0xc8774c, metalness: 1, roughness: 0.23, envMapIntensity: 1.8 }
   };
 
-  const faceMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, clearcoat: 0.3, clearcoatRoughness: 0.2 });
-  const sideMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, color: 0x989ea8, roughness: 0.35 });
+  const faceMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, clearcoat: 0.3, clearcoatRoughness: 0.2, side: THREE.DoubleSide });
+  const sideMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, color: 0x989ea8, roughness: 0.35, side: THREE.DoubleSide });
   const logo = new THREE.Group();
   scene.add(logo);
 
@@ -88,12 +88,17 @@ try {
       // SVG has a downward Y axis; flip that axis to match the 3D scene.
       // Center the full approved outline, including its circular star emblem.
       geometry.translate(-svgWidth / 2, -svgHeight / 2, -extrusionDepth / (2 * scale));
-      geometry.scale(scale, -scale, scale);
+      geometry.scale(scale, scale, scale);
       geometry.computeVertexNormals();
       const part = new THREE.Mesh(geometry, [faceMat, sideMat]);
       logo.add(part);
     }
   }
+
+  // Reflect the entire 3D object (rather than its vertex positions) to convert
+  // SVG's downward Y axis into Three.js's upward Y axis. The renderer then
+  // correctly accounts for the negative determinant when culling face triangles.
+  logo.scale.y = -1;
 
   // Use the source artwork itself when WebGL is unavailable.
   fallback.replaceChildren();
