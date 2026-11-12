@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import helvetiker from 'three/examples/fonts/helvetiker_bold.typeface.json';
+import approvedLogoSVG from './assets/astro-logo.svg?raw';
 import './style.css';
 
 // Menu: collapsed to the brand star, expanded to reveal the full navigation.
@@ -58,62 +57,56 @@ try {
     copper: { color: 0xc8774c, metalness: 1, roughness: 0.23, envMapIntensity: 1.8 }
   };
 
-  const faceMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, clearcoat: 0.3, clearcoatRoughness: 0.2 });
-  const sideMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, color: 0x989ea8, roughness: 0.35 });
-  const starMat = new THREE.MeshPhysicalMaterial({ color: 0x0b273a, metalness: 0.65, roughness: 0.32 });
+  const faceMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, clearcoat: 0.3, clearcoatRoughness: 0.2, side: THREE.DoubleSide });
+  const sideMat = new THREE.MeshPhysicalMaterial({ ...finishes.aluminum, color: 0x989ea8, roughness: 0.35, side: THREE.DoubleSide });
   const logo = new THREE.Group();
   scene.add(logo);
 
-  // True 3D extrusion: face geometry + deep, reflective sidewalls.
-  const font = new FontLoader().parse(helvetiker);
-  const geo = new TextGeometry('astro', {
-    font,
-    size: 2.1,
-    depth: 2.8,
-    curveSegments: 14,
-    bevelEnabled: true,
-    bevelThickness: 0.105,
-    bevelSize: 0.075,
-    bevelSegments: 4
-  });
-  geo.computeBoundingBox();
-  const bounds = geo.boundingBox;
-  const width = bounds.max.x - bounds.min.x;
-  const height = bounds.max.y - bounds.min.y;
-  geo.translate(-((bounds.min.x + bounds.max.x) / 2), -((bounds.min.y + bounds.max.y) / 2), -1.25);
-  geo.computeVertexNormals();
-  const word = new THREE.Mesh(geo, [faceMat, sideMat]);
-  logo.add(word);
+  // The geometry below is built DIRECTLY from the approved Astro.svg outlines.
+  // No substitute font, redrawn star or additional cylinder is used.
+  const svgLoader = new SVGLoader();
+  const svgData = svgLoader.parse(approvedLogoSVG);
+  const svgWidth = 303.89;
+  const svgHeight = 90.67;
+  const logoWidth = 10.8; // scene units; retains the logo's original aspect ratio
+  const scale = logoWidth / svgWidth;
+  const extrusionDepth = 2.35;
 
-  // Four-point icon, echoing the distinctive Astro star.
-  const starShape = new THREE.Shape();
-  const points = 16;
-  for (let i = 0; i < points; i++) {
-    const a = i / points * Math.PI * 2;
-    const r = i % 4 === 0 ? 0.44 : (i % 2 === 0 ? 0.19 : 0.155);
-    const x = Math.cos(a) * r;
-    const y = Math.sin(a) * r;
-    if (i === 0) starShape.moveTo(x, y);
-    else starShape.lineTo(x, y);
+  for (const path of svgData.paths) {
+    // createShapes preserves the counterforms / holes inside the approved SVG.
+    const shapes = SVGLoader.createShapes(path);
+    for (const shape of shapes) {
+      const geometry = new THREE.ExtrudeGeometry(shape, {
+        depth: extrusionDepth / scale,
+        steps: 1,
+        curveSegments: 16,
+        bevelEnabled: true,
+        bevelThickness: 0.035 / scale,
+        bevelSize: 0.032 / scale,
+        bevelSegments: 3
+      });
+      // SVG has a downward Y axis; flip that axis to match the 3D scene.
+      // Center the full approved outline, including its circular star emblem.
+      geometry.translate(-svgWidth / 2, -svgHeight / 2, -extrusionDepth / (2 * scale));
+      geometry.scale(scale, scale, scale);
+      geometry.computeVertexNormals();
+      const part = new THREE.Mesh(geometry, [faceMat, sideMat]);
+      logo.add(part);
+    }
   }
-  starShape.closePath();
-  const starGeo = new THREE.ExtrudeGeometry(starShape, { depth: 0.035, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.022, bevelThickness: 0.02 });
-  const star = new THREE.Mesh(starGeo, starMat);
-  // Position the star against the interior of the 'o'.
-  star.position.set(width * 0.385, -height * 0.015, 1.72);
-  logo.add(star);
 
-  // A profile extension on the right reinforces the physical aluminum extrusion concept.
-  const tubeGeo = new THREE.CylinderGeometry(0.75, 0.75, 3.9, 64, 1, false);
-  tubeGeo.rotateX(Math.PI / 2);
-  const tube = new THREE.Mesh(tubeGeo, sideMat);
-  tube.position.set(width * 0.43, -0.02, -1.55);
-  tube.scale.set(1, 1.02, 1);
-  logo.add(tube);
-  const cap = new THREE.Mesh(new THREE.CircleGeometry(0.75, 64), faceMat);
-  cap.position.set(width * 0.43, -0.02, -3.505);
-  cap.rotation.y = Math.PI;
-  logo.add(cap);
+  // Reflect the entire 3D object (rather than its vertex positions) to convert
+  // SVG's downward Y axis into Three.js's upward Y axis. The renderer then
+  // correctly accounts for the negative determinant when culling face triangles.
+  logo.scale.y = -1;
+
+  // Use the source artwork itself when WebGL is unavailable.
+  fallback.replaceChildren();
+  const fallbackLogo = document.createElement('img');
+  fallbackLogo.src = '/astro-logo.svg';
+  fallbackLogo.alt = 'Astro Shapes logo';
+  fallbackLogo.className = 'fallback-logo';
+  fallback.appendChild(fallbackLogo);
 
   logo.rotation.set(-0.10, -0.26, -0.035);
   let targetRotX = logo.rotation.x;
