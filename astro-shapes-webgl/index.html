@@ -3,66 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f1f0ef" />
-  <meta name="description" content="Astro Shapes — engineered aluminum extrusions, made for possibility." />
-  <title>Astro Shapes — Engineered for Possibility</title>
+  <meta name="theme-color" content="#002b49" />
+  <meta name="description" content="Astro Shapes — custom aluminum extrusions, finishing, thermal, shipping and manufacturing excellence." />
+  <title>Astro Shapes — Custom Aluminum Extrusions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div id="app">
-    <header class="site-header">
-      <a class="mobile-wordmark" href="#top" aria-label="Astro Shapes home">astro<span class="mark-mini">✦</span></a>
-      <nav class="nav-drawer" id="main-navigation" aria-label="Main navigation">
-        <a href="#services">Services</a>
-        <a href="#products">Products</a>
-        <a href="#about">About</a>
-        <a href="mailto:hello@astroshapes.com?subject=Astro%20Shapes%20Inquiry">Contact</a>
-        <a href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer">Website <span aria-hidden="true">↗</span></a>
-      </nav>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Open navigation"><span class="nav-star" aria-hidden="true">✦</span></button>
-    </header>
-
-    <main id="top">
-      <section class="hero" aria-label="Interactive Astro Shapes extruded logo">
-        <div class="hero-grain" aria-hidden="true"></div>
-        <div class="finish-panel">
-          <p class="eyebrow">01 / MATERIAL EXPLORER</p>
-          <div class="finishes" role="group" aria-label="Select extrusion finish">
-            <button class="finish-choice selected" data-finish="aluminum" type="button" aria-pressed="true"><span class="finish-dot"></span>Aluminum</button>
-            <button class="finish-choice" data-finish="black" type="button" aria-pressed="false"><span class="finish-dot"></span>Black Chrome</button>
-            <button class="finish-choice" data-finish="copper" type="button" aria-pressed="false"><span class="finish-dot"></span>Copper</button>
-          </div>
+<div id="app">
+  <header class="site-header expanded">
+    <a class="mobile-wordmark" href="#top" aria-label="Astro Shapes home">ASTRO SHAPES</a>
+    <nav class="nav-drawer" id="main-navigation" aria-label="Main navigation">
+      <a href="#services">SERVICES</a>
+      <a href="#products">PRODUCTS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+      <a class="brochure-link" href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer">BROCHURE <span aria-hidden="true">⇩</span></a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="true" aria-controls="main-navigation" aria-label="Close navigation"><img src="/assets/star.png" alt="" /></button>
+  </header>
+  <main id="top">
+    <section class="hero" aria-label="Interactive Astro Shapes aluminum extrusion">
+      <div class="finish-panel">
+        <div class="finishes" role="group" aria-label="Choose metal finish">
+          <button class="finish-choice selected" data-finish="aluminum" aria-pressed="true" type="button"><span class="finish-dot"></span>Aluminum</button>
+          <button class="finish-choice" data-finish="black" aria-pressed="false" type="button"><span class="finish-dot"></span>Black Chrome</button>
+          <button class="finish-choice" data-finish="copper" aria-pressed="false" type="button"><span class="finish-dot"></span>Copper</button>
         </div>
-
-        <div class="webgl-wrap" id="webgl-wrap">
-          <canvas id="webgl-canvas" aria-label="Interactive 3D metal Astro logo. Drag to rotate, scroll to zoom." role="img"></canvas>
-          <div class="webgl-fallback" id="webgl-fallback" hidden>ASTRO<span>✦</span></div>
-        </div>
-        <div class="drag-hint" id="drag-hint"><span class="drag-icon">↔</span> DRAG TO EXPLORE <span class="drag-separator">·</span> SCROLL TO ZOOM</div>
-
-        <div class="hero-bottom">
-          <div class="mission-title">OUR MISSION</div>
-          <div class="mission-rule"></div>
-          <p>To manufacture custom-finished aluminum extrusions for markets that demand excellence in quality and service.</p>
-        </div>
-        <div class="hero-index">ASTRO SHAPES <span>—</span> 01 / 03</div>
-      </section>
-
-      <section class="services-section" id="services">
-        <div class="section-kicker"><span>SERVICES</span><span>ENGINEERED FOR WHAT'S NEXT</span></div>
-        <div class="services-intro"><h1>Made to shape<br /><em>what's possible.</em></h1><p>From engineering through finishing and delivery, every detail is shaped by the people behind the work.</p></div>
+      </div>
+      <div class="webgl-wrap" id="webgl-wrap"><canvas id="webgl-canvas" role="img" aria-label="Interactive three-dimensional extruded Astro Shapes logo. Drag to rotate, scroll to zoom."></canvas><div class="webgl-fallback" id="webgl-fallback" hidden></div></div>
+      <p class="drag-hint" id="drag-hint">DRAG TO EXPLORE · SCROLL TO ZOOM</p>
+      <div class="hero-bottom">
+        <h1 class="mission-title">OUR MISSION</h1><span class="mission-rule" aria-hidden="true"></span>
+        <p>To manufacture custom-finished aluminum extrusions for markets that demand excellence in quality and service. <a href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer" class="video-link" title="Visit Astro Shapes">DISCOVER MORE</a></p>
+      </div>
+    </section>
+    <section class="services-section" id="services">
+      <div class="section-inner">
+        <h2>SERVICES</h2>
         <div class="service-grid">
-          <a class="service-card" href="https://www.astroshapes.com/services/" target="_blank" rel="noopener noreferrer"><span class="service-number">01</span><span class="service-visual finishing-art" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>Finishing</h2><span class="service-arrow">↗</span></div><p>Exceptional finishes. Enduring performance.</p></a>
-          <a class="service-card" href="https://www.astroshapes.com/services/thermal/" target="_blank" rel="noopener noreferrer"><span class="service-number">02</span><span class="service-visual thermal-art" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>Thermal</h2><span class="service-arrow">↗</span></div><p>Engineered for energy performance.</p></a>
-          <a class="service-card" href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer"><span class="service-number">03</span><span class="service-visual shipping-art" aria-hidden="true"><i></i><i></i><i></i></span><div><h2>Shipping</h2><span class="service-arrow">↗</span></div><p>From our floor to your next big idea.</p></a>
+          <a class="service-card" href="https://www.astroshapes.com/services/" target="_blank" rel="noopener noreferrer"><img src="/assets/finishing.png" alt="Finished aluminum profiles in production" /><span>Finishing</span></a>
+          <a class="service-card" href="https://www.astroshapes.com/services/thermal/" target="_blank" rel="noopener noreferrer"><img src="/assets/thermal.png" alt="Extruded aluminum sections undergoing thermal processing" /><span>Thermal</span></a>
+          <a class="service-card" href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer"><img src="/assets/shipping.png" alt="Worker loading aluminum extrusion shipments onto a truck" /><span>Shipping</span></a>
         </div>
-      </section>
-      <section class="closing-section" id="products"><span class="eyebrow">PRODUCTS / CAPABILITIES</span><h2>Precision in every profile.</h2><p>Explore the possibilities of custom aluminum extrusions.</p><a href="https://www.astroshapes.com/" target="_blank" rel="noopener noreferrer">Explore Astro Shapes <span>↗</span></a></section>
-      <footer id="about"><span>✦ ASTRO SHAPES</span><span>CRAFTED FOR POSSIBILITY.</span><span>INTERACTIVE CONCEPT © 2026</span></footer>
-    </main>
-  </div>
-  <script type="module" src="/src/main.js"></script>
+        <div class="slider-track" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+    <section class="quality-section" id="about">
+      <div class="quality-inner">
+        <img class="quality-badge" src="/assets/quality-badge.png" alt="Quality certification symbol" />
+        <h2>“Quality is a<br /> continuous<br /> commitment.”</h2>
+        <p>Through ongoing improvements in technology, manufacturing and product development, our Total Quality Assurance Program combines design assistance and AutoCAD expertise to deliver efficient, cost-effective solutions. We listen, collaborate and build lasting value for our customers.</p>
+        <a class="contact-button" href="mailto:sales@astroshapes.com">CONTACT US</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div><h3>COMPANY INFORMATION</h3><address>65 Main Street<br />Struthers, Ohio 44471<br />Phone: (330) 755-1414<br />Fax: (330) 755-2233<br /><br /><a href="mailto:sales@astroshapes.com">sales@astroshapes.com</a><br /><br /><a href="https://www.astroshapes.com/wp-content/uploads/2024/04/Supplier-Code-of-Conduct.pdf" target="_blank" rel="noopener noreferrer">Supplier Code of Conduct</a></address></div>
+      <div id="products"><h3>PRODUCTS</h3><ul><li>OPERATIONS MANAGEMENT</li><li>THERMAL</li><li>FINISHING</li><li>PACKAGING</li><li>FABRICATION</li><li>EXTRUSION</li></ul></div>
+      <div><h3>ACCREDITATIONS</h3><img class="iso-mark" src="/assets/iso-certification.png" alt="ISO 9001:2015 certification"/></div>
+    </div>
+  </footer>
+</div>
+<script type="module" src="/src/main.js"></script>
 </body>
 </html>
